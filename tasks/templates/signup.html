@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header text-center">
+          Signup
+        </div>
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-grid gap-2">
+              <input type="submit" class="btn btn-primary" value="Signup">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Tasks</h1>
+
+  <a href="{% url 'task_new' %}" class="btn btn-primary float-end">Add</a>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a
+        class="nav-link {% if active_tab == 'all' %}active{% endif %}"
+        {% if active_tab == 'all' %}aria-current="page"{% endif %}
+        href="{% url 'tasks' %}"
+      >
+        All
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link {% if active_tab == 'pending' %}active{% endif %}"
+        {% if active_tab == 'pending' %}aria-current="page"{% endif %}
+        href="{% url 'tasks_pending' %}"
+      >
+        Pending
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link {% if active_tab == 'completed' %}active{% endif %}"
+        {% if active_tab == 'completed' %}aria-current="page"{% endif %}
+        href="{% url 'tasks_completed' %}"
+      >
+        Completed
+      </a>
+    </li>
+  </ul>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Important</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.important }}</td>
+        <td>
+          <a href="{% url 'task_detail' task.pk %}" class="btn btn-info">View</a>
+          <a href="{% url 'task_edit' task.pk %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
